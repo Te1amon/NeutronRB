@@ -1,11 +1,13 @@
 if game.ReplicatedStorage.Events.NeutronEvent then
       -- remote already exists
       else
-      -- create a nee remoteevent
+      -- create a new remoteevent
 lol = Instance.new("RemoteEvent")
 lol.Name = "NeutronEvent"
 lol.Parent = game.ReplicatedStorage.Events
       end
+
+      wait()
 
 game.ReplicatedStorage.Events.NeutronEvent.OnServerEvent:Connect(function(plr, oldpos, newpos)
 getCharacter = function(plrmabob)
