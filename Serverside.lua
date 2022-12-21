@@ -1,3 +1,12 @@
+if game.ReplicatedStorage.Events then
+    -- folder already exists
+      else
+      -- create a new folder
+      lol = Instance.new("Folder")
+      lol.Name = "Events"
+      lol.Parent = game.ReplicatedStorage
+      end
+
 if game.ReplicatedStorage.Events.NeutronEvent then
       -- remote already exists
       else
