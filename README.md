@@ -17,6 +17,8 @@ RemoteSpys
 
 Scripts such as FE Ban Hammer
 
+Character Manipulation (Humanoid for example)
+
 \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \
 
-Check releases for rbxm files
+Check releases for rbxm files (when they are finally released LOL)
