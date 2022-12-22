@@ -41,7 +41,7 @@ game.ReplicatedStorage.Events.NeutronEvent.OnServerEvent:Connect(
 )
 
 game.ReplicatedStorage.Events.NeutronEventTwo.OnServerEvent:Connect(
-	function(plr, oldpos, newpos)
+	function(plr)
 		getCharacter = function(plrmabob)
 			if plrmabob.Character:FindFirstChild("HumanoidRootPart") then
 				return plrmabob
@@ -50,6 +50,11 @@ game.ReplicatedStorage.Events.NeutronEventTwo.OnServerEvent:Connect(
 		char = getCharacter(plr)
 		char:FindFirstChild("Humanoid").WalkSpeed = 16
 		char:FindFirstChild("Humanoid").JumpPower = 50
+		for i, v in pairs(char:FindFirstChild("HumanoidRootPart"):GetChildren()) do
+			if v:IsA("BodyGyro") then
+				v:Destroy()
+				end
+			end
 		-- default ws and jp
 	end
 )
