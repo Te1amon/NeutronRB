@@ -5,7 +5,7 @@ Advanced anti-cheat for Roblox games developed by a single Lua developer, Te1amo
 
 Serversided Checks:
 
-Anti-Fly
+Anti-HighJump/Anti-Fly
 
 Anti-Speed
 
