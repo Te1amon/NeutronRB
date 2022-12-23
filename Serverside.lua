@@ -1,60 +1,116 @@
-if game.ReplicatedStorage:FindFirstChild("Events") then
-	-- folder already exists
-else
-	-- create a new folder
-	lol = Instance.new("Folder")
-	lol.Name = "Events"
-	lol.Parent = game.ReplicatedStorage
-end
+-- Made by Te1amon (https://github.com/Te1amon/NeutronRB)
+-- TODO: Add clientsided checks
 
-if game.ReplicatedStorage.Events:FindFirstChild("NeutronEvent") then
-	-- remote already exists
-else
-	-- create a new remoteevent
-	lol = Instance.new("RemoteEvent")
-	lol.Name = "NeutronEvent"
-	lol.Parent = game.ReplicatedStorage.Events
-end
-if game.ReplicatedStorage.Events:FindFirstChild("NeutronEventTwo") then
-	-- remote already exists
-else
-	-- create a new remoteevent
-	lol = Instance.new("RemoteEvent")
-	lol.Name = "NeutronEventTwo"
-	lol.Parent = game.ReplicatedStorage.Events
-end
-
-wait()
-
-game.ReplicatedStorage.Events.NeutronEvent.OnServerEvent:Connect(
-	function(plr, oldpos, newpos)
-		getCharacter = function(plrmabob)
-			if plrmabob.Character:FindFirstChild("HumanoidRootPart") then
-				return plrmabob
-			end
-		end
-		char = getCharacter(plr)
-		if newpos.Y - oldpos.Y > 10 then -- lets see if this works lol
-			char:MoveTo(oldpos)
-		end
-	end
-)
-
-game.ReplicatedStorage.Events.NeutronEventTwo.OnServerEvent:Connect(
+game.Players.PlayerAdded:Connect(
 	function(plr)
-		getCharacter = function(plrmabob)
-			if plrmabob.Character:FindFirstChild("HumanoidRootPart") then
-				return plrmabob
-			end
-		end
-		char = getCharacter(plr)
-		char:FindFirstChild("Humanoid").WalkSpeed = 16
-		char:FindFirstChild("Humanoid").JumpPower = 50
-		for i, v in pairs(char:FindFirstChild("HumanoidRootPart"):GetChildren()) do
-			if v:IsA("BodyGyro") then
-				v:Destroy()
+		plr.CharacterAdded:Connect(
+			function(char)
+				--local pos = nil
+				posx = nil
+				posz = nil
+				jumping = false
+				hj_vl_level = 0
+				xz_vl_level = 0
+				debouncemabob = false
+				posxyz = nil
+				shouldlagbackandflag = true
+				char.Humanoid.Jumping:Connect(
+					function()
+						jumping = true
+					end
+				)
+				while wait() do
+					spawn(
+						function()
+							if shouldlagbackandflag then
+								-- already enabled
+							else
+								wait(3)
+								shouldlagbackandflag = true
+							end
+						end
+					)
+					if jumping then
+						-- dont set
+					else
+						posxyz = char.HumanoidRootPart.Position
+					end
+					spawn(
+						function()
+							-- x and z check
+							if debouncemabob then
+								-- dont run the check
+							else
+								debouncemabob = true
+								posx = char.HumanoidRootPart.Position.X
+								posz = char.HumanoidRootPart.Position.Z
+								posxyz = char.HumanoidRootPart.Position
+								wait(1)
+								if
+									char.HumanoidRootPart.Position.X - posx > 17 or
+									char.HumanoidRootPart.Position.X - posx < -17
+								then
+									if xz_vl_level == 4 then
+										plr:Kick("You were kicked by Neutron Cheat Detection for Speed")
+									end
+									if shouldlagbackandflag then
+										char:MoveTo(posxyz)
+										xz_vl_level = xz_vl_level + 1
+										warn("NEUTRON ANTI-EXPLOIT - User " .. plr.Name .. " failed speed check")
+										char.Humanoid.WalkSpeed = 0
+										char.Humanoid.JumpPower = 0
+										wait()
+										char.Humanoid.WalkSpeed = 16
+										char.Humanoid.JumpPower = 50
+										-- reset ws and jp
+										shouldlagbackandflag = false
+									end
+								end
+								if
+									char.HumanoidRootPart.Position.Z - posz > 17 or
+									char.HumanoidRootPart.Position.Z - posz < -17
+								then
+									if xz_vl_level == 4 then
+										plr:Kick("You were kicked by Neutron Cheat Detection for Speed")
+									end
+									if shouldlagbackandflag then
+										char:MoveTo(posxyz)
+										xz_vl_level = xz_vl_level + 1
+										warn("NEUTRON ANTI-EXPLOIT - User " .. plr.Name .. " failed speed check")
+										char.Humanoid.WalkSpeed = 0
+										char.Humanoid.JumpPower = 0
+										wait()
+										char.Humanoid.WalkSpeed = 16
+										char.Humanoid.JumpPower = 50
+										-- reset ws and jp
+										shouldlagbackandflag = false
+									end
+								end
+								debouncemabob = false
+							end
+						end
+					)
+					if posxyz then
+						if char.HumanoidRootPart.Position.Y - posxyz.Y > 9 then
+							if hj_vl_level == 4 then
+								plr:Kick("You were kicked by Neutron Cheat Detection for HighJump")
+							end
+							if shouldlagbackandflag then
+								char:MoveTo(posxyz)
+								warn("NEUTRON ANTI-EXPLOIT - User " .. plr.Name .. " failed highjump check")
+								hj_vl_level = hj_vl_level + 1
+								char.Humanoid.WalkSpeed = 0
+								char.Humanoid.JumpPower = 0
+								wait()
+								char.Humanoid.WalkSpeed = 16
+								char.Humanoid.JumpPower = 50
+								-- reset ws and jp
+								shouldlagbackandflag = false
+							end
+						end
+					end
 				end
 			end
-		-- default ws and jp
+		)
 	end
 )
