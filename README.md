@@ -11,7 +11,7 @@ Anti-Speed
 
 \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \
 
-Clientside Checks: << coming soon
+Clientside Checks:
 
 RemoteSpys
 
@@ -21,4 +21,4 @@ Character Manipulation (Humanoid for example)
 
 \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \
 
-Check releases for rbxm files (when they are finally released LOL)
+Check releases for rbxm files
