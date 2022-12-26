@@ -19,6 +19,10 @@ Scripts such as FE Ban Hammer
 
 Character Manipulation (Humanoid for example)
 
+Infinite Yield Float
+
+Gravity Manipulation 
+
 \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \
 
 Check releases for rbxm files
